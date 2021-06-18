@@ -222,7 +222,8 @@ public class CartItemsServiceImpl implements CartItemsService {
     AtomicReference<Double> minPrice = new AtomicReference<>(Double.MAX_VALUE);
     offerDTOList.forEach(offerDTO -> {
       double discountedPrice = Double.MAX_VALUE;
-      boolean isEligibleForDiscount = offerDTO.getMinimumQuantity() >= prodIdToCartItemsDTOMap.get(offerDTO.getProductId()).getQuantity();
+      boolean isEligibleForDiscount = offerDTO.getMinimumQuantity() <= prodIdToCartItemsDTOMap.get(offerDTO.getProductId()).getQuantity();
+
       if (isEligibleForDiscount) {
         if (OfferType.DISCOUNT.equals(offerDTO.getOfferType())) {
           discountedPrice = calculatePriceAfterDiscount(quantityPurchased, offerDTO.getDiscount(), price);
@@ -231,12 +232,11 @@ public class CartItemsServiceImpl implements CartItemsService {
         } else if (OfferType.FLAT_DISCOUNT.equals(offerDTO.getOfferType())) {
           discountedPrice = calculatePriceAfterFlatDiscount(quantityPurchased, offerDTO.getDiscount(), price);
         }
+        minPrice.set(Math.min(minPrice.get(), discountedPrice));
       }
-      minPrice.set(Math.min(minPrice.get(), discountedPrice));
     });
 
-
-    return minPrice.get();
+    return minPrice.get().equals(Double.MAX_VALUE) ? 0 : minPrice.get();
   }
 
 }
