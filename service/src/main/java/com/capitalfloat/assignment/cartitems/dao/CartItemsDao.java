@@ -1,6 +1,6 @@
 package com.capitalfloat.assignment.cartitems.dao;
 
-import com.capitalfloat.assignment.cartitems.dto.CartItemsDTO;
+import com.capitalfloat.assignment.cartitems.dto.CartItemDTO;
 
 import java.util.List;
 
@@ -16,10 +16,10 @@ public interface CartItemsDao {
 
   /***
    * Add required items to cart
-   * @param cartItemsDTO
+   * @param cartItemDTO
    * @return
    */
-  void addToCart(CartItemsDTO cartItemsDTO);
+  void addToCart(CartItemDTO cartItemDTO);
 
   /***
    * Remove items from cart based on given params
@@ -41,6 +41,6 @@ public interface CartItemsDao {
    * @param userId
    * @return
    */
-  List<CartItemsDTO> getCartItems(String userId);
+  List<CartItemDTO> getCartItems(String userId);
 
 }

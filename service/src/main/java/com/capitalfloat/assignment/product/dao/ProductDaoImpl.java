@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static com.capitalfloat.assignment.utils.Constants.*;
+import static com.capitalfloat.assignment.utils.SQLStatements.*;
 
 /**
  * Created by @author Partho Paul on 17/06/21
@@ -37,8 +37,12 @@ public class ProductDaoImpl implements ProductDao{
 
   @Override
   public ProductDTO getProduct(String productId) {
-    StringBuilder query = new StringBuilder(SELECT).append(ALL).append(FROM).append(PRODUCT_TABLE).append(WHERE).append(PRODUCT_ID)
-        .append(EQUALS).append(QUOTES).append(productId).append(QUOTES).append(SEMI_COLON);
+    StringBuilder query = new StringBuilder(SELECT).append(ALL).append(FROM)
+        .append(PRODUCT_TABLE)
+        .append(WHERE)
+        .append(PRODUCT_ID)
+        .append(EQUALS).append(QUOTES).append(productId).append(QUOTES)
+        .append(SEMI_COLON);
     List<Map<String, Object>> result = jdbcTemplate.queryForList(query.toString());
     if(CollectionUtils.isEmpty(result) || MapUtils.isEmpty(result.get(0))){
       return null;
@@ -55,35 +59,48 @@ public class ProductDaoImpl implements ProductDao{
 
   @Override
   public void addProduct(ProductDTO productDTO) {
-    StringBuilder query = new StringBuilder(INSERT_INTO).append(PRODUCT_TABLE).append(PARENTHESIS_OPEN).append(PRODUCT_ID)
-        .append(COMMA).append(PRODUCT_NAME).append(COMMA).append(AVAILABLE_QUANTITY).append(COMMA).append(PRICE)
-        .append(COMMA).append(CATEGORY).append(PARENTHESIS_CLOSE)
-        .append(VALUES).append(PARENTHESIS_OPEN).append(QUOTES).append(productDTO.getProductId()).append(QUOTES).append(COMMA)
-        .append(QUOTES).append(productDTO.getProductName()).append(QUOTES).append(COMMA).append(productDTO.getAvailableQuantity())
-        .append(COMMA).append(productDTO.getPrice()).append(COMMA).append(QUOTES).append(productDTO.getCategory()).append(QUOTES)
-        .append(PARENTHESIS_CLOSE).append(SEMI_COLON);
+    StringBuilder query = new StringBuilder(INSERT_INTO).append(PRODUCT_TABLE)
+        .append(PARENTHESIS_OPEN)
+        .append(PRODUCT_ID).append(COMMA).append(PRODUCT_NAME).append(COMMA).append(AVAILABLE_QUANTITY).append(COMMA).append(PRICE)
+        .append(COMMA).append(CATEGORY)
+        .append(PARENTHESIS_CLOSE)
+        .append(VALUES)
+        .append(PARENTHESIS_OPEN)
+        .append(QUOTES).append(productDTO.getProductId()).append(QUOTES).append(COMMA)
+        .append(QUOTES).append(productDTO.getProductName()).append(QUOTES).append(COMMA)
+        .append(productDTO.getAvailableQuantity()).append(COMMA)
+        .append(productDTO.getPrice()).append(COMMA)
+        .append(QUOTES).append(productDTO.getCategory()).append(QUOTES)
+        .append(PARENTHESIS_CLOSE)
+        .append(SEMI_COLON);
     jdbcTemplate.execute(query.toString());
   }
 
   @Override
   public void updateQuantity(String productId, int availableQuantity) {
-    StringBuilder query = new StringBuilder(UPDATE).append(PRODUCT_TABLE).append(SET).append(AVAILABLE_QUANTITY).append(EQUALS)
-        .append(availableQuantity).append(WHERE).append(PRODUCT_ID).append(EQUALS).append(QUOTES).append(productId)
-        .append(QUOTES).append(SEMI_COLON);
+    StringBuilder query = new StringBuilder(UPDATE)
+        .append(PRODUCT_TABLE)
+        .append(SET)
+        .append(AVAILABLE_QUANTITY).append(EQUALS).append(availableQuantity)
+        .append(WHERE).append(PRODUCT_ID).append(EQUALS).append(QUOTES).append(productId).append(QUOTES)
+        .append(SEMI_COLON);
     jdbcTemplate.execute(query.toString());
   }
 
   @Override
   public void deleteProduct(String productId) {
-    StringBuilder query = new StringBuilder(DELETE).append(FROM).append(PRODUCT_TABLE).append(WHERE).append(PRODUCT_ID)
-        .append(EQUALS).append(QUOTES).append(productId).append(QUOTES).append(SEMI_COLON);
+    StringBuilder query = new StringBuilder(DELETE).append(FROM)
+        .append(PRODUCT_TABLE)
+        .append(WHERE).append(PRODUCT_ID).append(EQUALS).append(QUOTES).append(productId).append(QUOTES)
+        .append(SEMI_COLON);
     jdbcTemplate.execute(query.toString());
   }
 
   @Override
   public List<ProductDTO> getProducts(List<String> productIds) {
-    StringBuilder query = new StringBuilder(SELECT).append(ALL).append(FROM).append(PRODUCT_TABLE).append(WHERE).append(PRODUCT_ID)
-        .append(IN).append(PARENTHESIS_OPEN);
+    StringBuilder query = new StringBuilder(SELECT).append(ALL).append(FROM)
+        .append(PRODUCT_TABLE)
+        .append(WHERE).append(PRODUCT_ID).append(IN).append(PARENTHESIS_OPEN);
     for (int i = 0; i < productIds.size(); i++) {
       query.append(QUOTES).append(productIds.get(i)).append(QUOTES);
       if(productIds.size() -1 != i){

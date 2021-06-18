@@ -9,8 +9,9 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
-import static com.capitalfloat.assignment.utils.Constants.*;
+import static com.capitalfloat.assignment.utils.SQLStatements.*;
 
 /**
  * Created by @author Partho Paul on 17/06/21
@@ -34,8 +35,11 @@ public class UserDaoImpl implements UserDao{
 
   @Override
   public UserDTO findUserByEmail(String emailId) {
-    StringBuilder query = new StringBuilder(SELECT).append(ALL).append(FROM).append(USER_TABLE).append(WHERE).
-        append(EMAIL_ID).append(EQUALS).append(QUOTES).append(emailId).append(QUOTES).append(SEMI_COLON);
+    StringBuilder query = new StringBuilder(SELECT).append(ALL).append(FROM)
+        .append(USER_TABLE)
+        .append(WHERE)
+        .append(EMAIL_ID).append(EQUALS).append(QUOTES).append(emailId).append(QUOTES)
+        .append(SEMI_COLON);
     List<Map<String, Object>> result = jdbcTemplate.queryForList(query.toString());
     if(CollectionUtils.isEmpty(result) || MapUtils.isEmpty(result.get(0))){
       return null;
@@ -44,26 +48,37 @@ public class UserDaoImpl implements UserDao{
     UserDTO userDTO = new UserDTO();
     userDTO.setUserId((String) row.get(USER_ID));
     userDTO.setEmailId((String) row.get(EMAIL_ID));
-    userDTO.setName((String) row.get(NAME));
-    userDTO.setAddress((String) row.get(ADDRESS));
+    userDTO.setName(Objects.isNull(row.get(NAME)) ? null : (String) row.get(NAME));
+    userDTO.setAddress(Objects.isNull(row.get(ADDRESS)) ? null : (String) row.get(ADDRESS));
     return userDTO;
   }
 
   @Override
-  public void addUser(UserDTO userDTO) {
-    StringBuilder query = new StringBuilder(INSERT_INTO).append(USER_TABLE).append(PARENTHESIS_OPEN).append(USER_ID)
-        .append(COMMA).append(EMAIL_ID).append(COMMA).append(NAME).append(COMMA).append(ADDRESS).append(PARENTHESIS_CLOSE)
-        .append(VALUES).append(PARENTHESIS_OPEN).append(QUOTES).append(userDTO.getUserId()).append(QUOTES).append(COMMA)
-        .append(QUOTES).append(userDTO.getEmailId()).append(QUOTES).append(COMMA).append(QUOTES).append(userDTO.getName())
-        .append(QUOTES).append(COMMA).append(QUOTES).append(userDTO.getAddress()).append(QUOTES).append(PARENTHESIS_CLOSE)
+  public void createUser(UserDTO userDTO) {
+    StringBuilder query = new StringBuilder(INSERT_INTO)
+        .append(USER_TABLE)
+        .append(PARENTHESIS_OPEN)
+        .append(USER_ID).append(COMMA).append(EMAIL_ID).append(COMMA).append(NAME).append(COMMA).append(ADDRESS)
+        .append(PARENTHESIS_CLOSE)
+        .append(VALUES)
+        .append(PARENTHESIS_OPEN)
+        .append(QUOTES).append(userDTO.getUserId()).append(QUOTES).append(COMMA)
+        .append(QUOTES).append(userDTO.getEmailId()).append(QUOTES).append(COMMA)
+        .append(QUOTES).append(userDTO.getName()).append(QUOTES).append(COMMA)
+        .append(QUOTES).append(userDTO.getAddress()).append(QUOTES)
+        .append(PARENTHESIS_CLOSE)
         .append(SEMI_COLON);
     jdbcTemplate.execute(query.toString());
   }
 
   @Override
   public void deleteUser(String userId) {
-    StringBuilder query = new StringBuilder(DELETE).append(FROM).append(USER_TABLE).append(WHERE).append(USER_ID)
-        .append(EQUALS).append(QUOTES).append(userId).append(QUOTES).append(SEMI_COLON);
+    StringBuilder query = new StringBuilder(DELETE).append(FROM)
+        .append(USER_TABLE)
+        .append(WHERE)
+        .append(USER_ID)
+        .append(EQUALS).append(QUOTES).append(userId).append(QUOTES)
+        .append(SEMI_COLON);
     jdbcTemplate.execute(query.toString());
   }
 }

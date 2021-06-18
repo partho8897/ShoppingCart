@@ -9,12 +9,12 @@ com/capitalfloat/assignment/user/UserConstants.class
 com/capitalfloat/assignment/offer/OfferConstants.class
 com/capitalfloat/assignment/user/dao/UserDao.class
 com/capitalfloat/assignment/product/ProductConstants.class
-com/capitalfloat/assignment/utils/Constants.class
 com/capitalfloat/assignment/user/service/UserServiceImpl.class
 com/capitalfloat/assignment/product/dao/ProductDaoImpl.class
 com/capitalfloat/assignment/cartitems/dao/CartItemsDaoImpl.class
 com/capitalfloat/assignment/product/service/ProductServiceImpl.class
 com/capitalfloat/assignment/cartitems/CartItemsUtils.class
+com/capitalfloat/assignment/utils/SQLStatements.class
 com/capitalfloat/assignment/config/ConfigService.class
 com/capitalfloat/assignment/product/service/ProductService.class
 com/capitalfloat/assignment/config/ConfigServiceImpl.class

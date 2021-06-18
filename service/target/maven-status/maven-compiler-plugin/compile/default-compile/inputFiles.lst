@@ -1,7 +1,6 @@
 /Users/parthopaul/personal/shopping-cart/service/src/main/java/com/capitalfloat/assignment/cartitems/dao/CartItemsDaoImpl.java
 /Users/parthopaul/personal/shopping-cart/service/src/main/java/com/capitalfloat/assignment/cartitems/dao/CartItemsDao.java
 /Users/parthopaul/personal/shopping-cart/service/src/main/java/com/capitalfloat/assignment/offer/OfferUtils.java
-/Users/parthopaul/personal/shopping-cart/service/src/main/java/com/capitalfloat/assignment/utils/Constants.java
 /Users/parthopaul/personal/shopping-cart/service/src/main/java/com/capitalfloat/assignment/offer/service/OfferServiceImpl.java
 /Users/parthopaul/personal/shopping-cart/service/src/main/java/com/capitalfloat/assignment/product/dao/ProductDaoImpl.java
 /Users/parthopaul/personal/shopping-cart/service/src/main/java/com/capitalfloat/assignment/offer/dao/OfferDaoImpl.java
@@ -21,6 +20,7 @@
 /Users/parthopaul/personal/shopping-cart/service/src/main/java/com/capitalfloat/assignment/config/ConfigServiceImpl.java
 /Users/parthopaul/personal/shopping-cart/service/src/main/java/com/capitalfloat/assignment/user/dao/UserDaoImpl.java
 /Users/parthopaul/personal/shopping-cart/service/src/main/java/com/capitalfloat/assignment/offer/service/OfferService.java
+/Users/parthopaul/personal/shopping-cart/service/src/main/java/com/capitalfloat/assignment/utils/SQLStatements.java
 /Users/parthopaul/personal/shopping-cart/service/src/main/java/com/capitalfloat/assignment/product/ProductUtils.java
 /Users/parthopaul/personal/shopping-cart/service/src/main/java/com/capitalfloat/assignment/user/service/UserService.java
 /Users/parthopaul/personal/shopping-cart/service/src/main/java/com/capitalfloat/assignment/cartitems/service/CartItemsServiceImpl.java

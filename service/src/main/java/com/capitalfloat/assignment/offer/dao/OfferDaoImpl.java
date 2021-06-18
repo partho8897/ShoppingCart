@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static com.capitalfloat.assignment.utils.Constants.*;
+import static com.capitalfloat.assignment.utils.SQLStatements.*;
 
 /**
  * Created by @author Partho Paul on 17/06/21
@@ -38,8 +38,11 @@ public class OfferDaoImpl implements OfferDao{
 
   @Override
   public List<OfferDTO> getOffers(String productId) {
-    StringBuilder query = new StringBuilder(SELECT).append(ALL).append(FROM).append(OFFER_TABLE).append(WHERE).append(PRODUCT_ID)
-        .append(EQUALS).append(QUOTES).append(productId).append(QUOTES).append(SEMI_COLON);
+    StringBuilder query = new StringBuilder(SELECT).append(ALL).append(FROM)
+        .append(OFFER_TABLE)
+        .append(WHERE)
+        .append(PRODUCT_ID).append(EQUALS).append(QUOTES).append(productId).append(QUOTES)
+        .append(SEMI_COLON);
     List<Map<String, Object>> results = jdbcTemplate.queryForList(query.toString());
     if(CollectionUtils.isEmpty(results) || MapUtils.isEmpty(results.get(0))){
       return new ArrayList<>();
@@ -59,20 +62,28 @@ public class OfferDaoImpl implements OfferDao{
 
   @Override
   public void addOffer(OfferDTO offerDTO) {
-    StringBuilder query = new StringBuilder(INSERT_INTO).append(OFFER_TABLE).append(PARENTHESIS_OPEN).append(OFFER_ID)
-        .append(COMMA).append(PRODUCT_ID).append(COMMA).append(MINIMUM_QUANTITY).append(COMMA).append(DISCOUNT).append(COMMA)
-        .append(OFFER_TYPE).append(PARENTHESIS_CLOSE).append(VALUES).append(PARENTHESIS_OPEN).append(QUOTES)
-        .append(offerDTO.getOfferId()).append(QUOTES).append(COMMA).append(QUOTES).append(offerDTO.getProductId())
-        .append(QUOTES).append(COMMA).append(offerDTO.getMinimumQuantity()).append(COMMA).append(offerDTO.getDiscount())
-        .append(COMMA).append(QUOTES).append(offerDTO.getOfferType()).append(QUOTES).append(PARENTHESIS_CLOSE)
+    StringBuilder query = new StringBuilder(INSERT_INTO)
+        .append(OFFER_TABLE)
+        .append(PARENTHESIS_OPEN).append(OFFER_ID).append(COMMA).append(PRODUCT_ID).append(COMMA).append(MINIMUM_QUANTITY)
+        .append(COMMA).append(DISCOUNT).append(COMMA).append(OFFER_TYPE)
+        .append(PARENTHESIS_CLOSE)
+        .append(VALUES)
+        .append(PARENTHESIS_OPEN)
+        .append(QUOTES).append(offerDTO.getOfferId()).append(QUOTES).append(COMMA)
+        .append(QUOTES).append(offerDTO.getProductId()).append(QUOTES).append(COMMA)
+        .append(offerDTO.getMinimumQuantity()).append(COMMA)
+        .append(offerDTO.getDiscount()).append(COMMA).append(QUOTES).append(offerDTO.getOfferType()).append(QUOTES)
+        .append(PARENTHESIS_CLOSE)
         .append(SEMI_COLON);
     jdbcTemplate.execute(query.toString());
   }
 
   @Override
   public void removeOffer(String offerId) {
-    StringBuilder query = new StringBuilder(DELETE).append(FROM).append(OFFER_TABLE).append(WHERE).append(OFFER_ID)
-        .append(EQUALS).append(QUOTES).append(offerId).append(QUOTES).append(SEMI_COLON);
+    StringBuilder query = new StringBuilder(DELETE).append(FROM)
+        .append(OFFER_TABLE)
+        .append(WHERE).append(OFFER_ID).append(EQUALS).append(QUOTES).append(offerId).append(QUOTES)
+        .append(SEMI_COLON);
     jdbcTemplate.execute(query.toString());
   }
 }

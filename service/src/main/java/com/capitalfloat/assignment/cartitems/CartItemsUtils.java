@@ -1,6 +1,6 @@
 package com.capitalfloat.assignment.cartitems;
 
-import com.capitalfloat.assignment.cartitems.dto.CartItemsDTO;
+import com.capitalfloat.assignment.cartitems.dto.CartItemDTO;
 import com.capitalfloat.assignment.cartitems.request.AddCartItemsRequest;
 import com.capitalfloat.assignment.cartitems.response.CheckoutCartResponse;
 import com.capitalfloat.assignment.product.dto.ProductDTO;
@@ -28,8 +28,8 @@ public interface CartItemsUtils {
     }
     if(!isUserIdValid(request.getUserId())){
       return USER_ID_BLANK;
-
     }
+
     if(!isQuantityValid(request.getQuantity())){
       return INVALID_QUANTITY;
     }
@@ -40,13 +40,13 @@ public interface CartItemsUtils {
     return StringUtils.isNotBlank(userId);
   }
 
-  static CartItemsDTO getCartItemsDTOFromRequest(AddCartItemsRequest request){
-    CartItemsDTO cartItemsDTO = new CartItemsDTO();
-    cartItemsDTO.setCartId(UUID.randomUUID().toString());
-    cartItemsDTO.setQuantity(request.getQuantity());
-    cartItemsDTO.setUserId(request.getUserId());
-    cartItemsDTO.setProductId(request.getProductId());
-    return cartItemsDTO;
+  static CartItemDTO getCartItemsDTOFromRequest(AddCartItemsRequest request){
+    CartItemDTO cartItemDTO = new CartItemDTO();
+    cartItemDTO.setCartId(UUID.randomUUID().toString());
+    cartItemDTO.setQuantity(request.getQuantity());
+    cartItemDTO.setUserId(request.getUserId());
+    cartItemDTO.setProductId(request.getProductId());
+    return cartItemDTO;
   }
 
   static CheckoutCartResponse getCheckoutCartResponse(List<String> productsCheckedOut, String userId,
@@ -67,9 +67,9 @@ public interface CartItemsUtils {
     return prodIdToProdDTOMap;
   }
 
-  static Map<String, CartItemsDTO> getProdIdToCartItemsDTOMap(List<CartItemsDTO> cartItemsDTOList){
-    Map<String, CartItemsDTO> prodIdToCartItemsDTOMap = new HashMap<>();
-    cartItemsDTOList.forEach(itemsDTO -> {
+  static Map<String, CartItemDTO> getProdIdToCartItemsDTOMap(List<CartItemDTO> cartItemDTOList){
+    Map<String, CartItemDTO> prodIdToCartItemsDTOMap = new HashMap<>();
+    cartItemDTOList.forEach(itemsDTO -> {
       prodIdToCartItemsDTOMap.put(itemsDTO.getProductId(), itemsDTO);
     });
     return prodIdToCartItemsDTOMap;

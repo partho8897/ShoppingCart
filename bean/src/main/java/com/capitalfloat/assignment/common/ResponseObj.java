@@ -12,4 +12,6 @@ public class ResponseObj {
   Object data;
   String errorMessage;
 
+  //Can keep error Code as well
+
 }

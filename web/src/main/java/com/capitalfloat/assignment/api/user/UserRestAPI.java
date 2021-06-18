@@ -1,7 +1,7 @@
 package com.capitalfloat.assignment.api.user;
 
 import com.capitalfloat.assignment.common.ResponseObj;
-import com.capitalfloat.assignment.user.request.AddUserRequest;
+import com.capitalfloat.assignment.user.request.CreateUserRequest;
 import com.capitalfloat.assignment.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -23,8 +23,8 @@ public class UserRestAPI {
   }
 
   @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseObj addUser(@RequestBody AddUserRequest addUserRequest){
-    return userService.addUser(addUserRequest);
+  public ResponseObj createUser(@RequestBody CreateUserRequest createUserRequest){
+    return userService.createUser(createUserRequest);
   }
 
 

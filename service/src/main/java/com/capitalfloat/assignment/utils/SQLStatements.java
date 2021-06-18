@@ -3,7 +3,7 @@ package com.capitalfloat.assignment.utils;
 /**
  * Created by @author Partho Paul on 18/06/21
  */
-public class Constants {
+public class SQLStatements {
 
   public static final String SELECT = "SELECT ";
   public static final String ALL = " * ";

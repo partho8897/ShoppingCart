@@ -3,7 +3,7 @@ package com.capitalfloat.assignment.user.service;
 import com.capitalfloat.assignment.common.ResponseObj;
 import com.capitalfloat.assignment.user.dao.UserDao;
 import com.capitalfloat.assignment.user.dto.UserDTO;
-import com.capitalfloat.assignment.user.request.AddUserRequest;
+import com.capitalfloat.assignment.user.request.CreateUserRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,15 +47,15 @@ public class UserServiceImpl implements UserService{
   }
 
   @Override
-  public ResponseObj addUser(AddUserRequest request) {
-    log.info("Received request to add user : {}", request);
-    if(StringUtils.isBlank(request.getEmaiId())){
+  public ResponseObj createUser(CreateUserRequest request) {
+    log.info("Received request to create user : {}", request);
+    if(StringUtils.isBlank(request.getEmailId())){
       log.warn("Validation failed request to add user {} with message: {}", request, EMAIL_ID_BLANK);
       return getResponseObjForFailure(EMAIL_ID_BLANK);
     }
     UserDTO userDTO = getUserDTOFromRequest(request);
     try{
-      userDao.addUser(userDTO);
+      userDao.createUser(userDTO);
       log.info("Successfully added user with userID : {}", userDTO.getUserId());
       return getResponseObjForSuccess(userDTO);
     } catch (Exception ex){
@@ -80,12 +80,12 @@ public class UserServiceImpl implements UserService{
     }
   }
 
-  private static UserDTO getUserDTOFromRequest(AddUserRequest request){
+  private static UserDTO getUserDTOFromRequest(CreateUserRequest request){
     UserDTO userDTO = new UserDTO();
     userDTO.setUserId(UUID.randomUUID().toString());
     userDTO.setAddress(request.getAddress());
     userDTO.setName(request.getName());
-    userDTO.setEmailId(request.getEmaiId());
+    userDTO.setEmailId(request.getEmailId());
     return userDTO;
   }
 }

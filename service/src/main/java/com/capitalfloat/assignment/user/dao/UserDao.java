@@ -24,7 +24,7 @@ public interface UserDao {
    * @param userDTO
    * @return
    */
-  void addUser(UserDTO userDTO);
+  void createUser(UserDTO userDTO);
 
   /***
    * Delete a user from the database based on it's userId
