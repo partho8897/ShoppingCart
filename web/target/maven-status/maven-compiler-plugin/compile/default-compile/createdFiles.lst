@@ -1,0 +1,6 @@
+com/capitalfloat/assignment/WebApplication.class
+com/capitalfloat/assignment/api/initialise/InitialiseRestAPI.class
+com/capitalfloat/assignment/api/offer/OfferRestAPI.class
+com/capitalfloat/assignment/api/product/ProductRestAPI.class
+com/capitalfloat/assignment/api/cartitems/CartItemsRestAPI.class
+com/capitalfloat/assignment/api/user/UserRestAPI.class
