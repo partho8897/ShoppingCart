@@ -219,7 +219,7 @@ public class CartItemsServiceImpl implements CartItemsService {
   private double calculateMinimumPrice(Map<String, CartItemDTO> prodIdToCartItemsDTOMap,
                                        List<OfferDTO> offerDTOList,
                                        int quantityPurchased, int price) {
-    AtomicReference<Double> minPrice = new AtomicReference<>(Double.MAX_VALUE);
+    AtomicReference<Double> minPrice = new AtomicReference<>((double) (quantityPurchased * price));
     offerDTOList.forEach(offerDTO -> {
       double discountedPrice = Double.MAX_VALUE;
       boolean isEligibleForDiscount = offerDTO.getMinimumQuantity() <= prodIdToCartItemsDTOMap.get(offerDTO.getProductId()).getQuantity();
