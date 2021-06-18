@@ -90,10 +90,6 @@ public class ProductDaoImpl implements ProductDao{
         query.append(COMMA);
       }
     }
-//    productIds.forEach(productId -> {
-//      query.append(QUOTES).append(productId).append(QUOTES).append(COMMA);
-//    });
-//    StringBuilder fQuery = query.deleteCharAt(query.length()-1);
     query.append(PARENTHESIS_CLOSE).append(SEMI_COLON);
     List<Map<String, Object>> result = jdbcTemplate.queryForList(query.toString());
     if(CollectionUtils.isEmpty(result) || MapUtils.isEmpty(result.get(0))){
