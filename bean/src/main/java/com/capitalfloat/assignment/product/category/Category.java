@@ -7,6 +7,9 @@ public enum Category {
 
   FRUIT,
   DAIRY,
-  CHOCOLATE
+  CHOCOLATE,
+  VEGETABLE,
+  DRINK,
+  SNACK
 
 }
