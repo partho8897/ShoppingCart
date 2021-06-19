@@ -236,7 +236,7 @@ public class CartItemsServiceImpl implements CartItemsService {
       }
     });
 
-    return minPrice.get().equals(Double.MAX_VALUE) ? 0 : minPrice.get();
+    return minPrice.get();
   }
 
 }
